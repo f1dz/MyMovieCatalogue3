@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.lonecode.mymoviecatalogue3.R;
 
-public class DashboardFragment extends Fragment {
+public class TvShowFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private TvShowViewModel tvshowViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(this, new Observer<String>() {
+        tvshowViewModel =
+                ViewModelProviders.of(this).get(TvShowViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_tvshow, container, false);
+        final TextView textView = root.findViewById(R.id.text_tvshow);
+        tvshowViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

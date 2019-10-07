@@ -13,8 +13,8 @@
 
     <fragment
         android:id="@+id/navigation_tvshow"
-        android:name="com.lonecode.mymoviecatalogue3.ui.tvshow.DashboardFragment"
+        android:name="com.lonecode.mymoviecatalogue3.ui.tvshow.TvShowFragment"
         android:label="@string/title_tvshow"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_tvshow" />
 
 </navigation>
