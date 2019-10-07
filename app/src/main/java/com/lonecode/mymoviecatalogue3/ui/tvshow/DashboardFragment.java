@@ -1,4 +1,4 @@
-package com.lonecode.mymoviecatalogue3.ui.dashboard;
+package com.lonecode.mymoviecatalogue3.ui.tvshow;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

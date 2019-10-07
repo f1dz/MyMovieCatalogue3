@@ -1,4 +1,4 @@
-package com.lonecode.mymoviecatalogue3.ui.home;
+package com.lonecode.mymoviecatalogue3.ui.movie;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.lonecode.mymoviecatalogue3.R;
 
-public class HomeFragment extends Fragment {
+public class MovieFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private MovieViewModel movieViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
+        movieViewModel =
+                ViewModelProviders.of(this).get(MovieViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_movie, container, false);
+        final TextView textView = root.findViewById(R.id.text_movie);
+        movieViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
