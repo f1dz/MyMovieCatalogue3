@@ -24,7 +24,7 @@ import com.lonecode.mymoviecatalogue3.R;
 
 import java.util.ArrayList;
 
-public class MovieFragment extends Fragment {
+public class MovieFragment extends Fragment implements ListMovieAdapter.OnItemClickCallback {
     private ListMovieAdapter listMovieAdapter;
     private ProgressBar progressBar;
 
@@ -46,7 +46,7 @@ public class MovieFragment extends Fragment {
         rvMovies.setHasFixedSize(true);
 
         rvMovies.setLayoutManager(new LinearLayoutManager(getActivity()));
-        listMovieAdapter = new ListMovieAdapter(getContext());
+        listMovieAdapter = new ListMovieAdapter(getContext(), this);
         listMovieAdapter.notifyDataSetChanged();
         rvMovies.setAdapter(listMovieAdapter);
 
@@ -64,17 +64,11 @@ public class MovieFragment extends Fragment {
             }
         });
 
-        listMovieAdapter.setOnItemClickCallback(new ListMovieAdapter.OnItemClickCallback() {
-            @Override
-            public void onItemClicked(Movie data) {
-                showSelectedMovie(data);
-            }
-        });
-
         return root;
     }
 
-    private void showSelectedMovie(Movie movie) {
+    @Override
+    public void onItemClicked(Movie movie) {
         Toast.makeText(getActivity(), "Movie: " + movie.getName() + "\nDescription: " + movie.getDescription(), Toast.LENGTH_SHORT).show();
     }
 }
