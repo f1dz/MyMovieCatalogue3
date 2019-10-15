@@ -1,5 +1,6 @@
 package com.lonecode.mymoviecatalogue3;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,20 +17,17 @@ import java.util.ArrayList;
 
 public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.ListViewHolder> {
     private ArrayList<Movie> listMovie = new ArrayList<>();
-
+    private Context context;
     private OnItemClickCallback onItemClickCallback;
 
+    public ListMovieAdapter(Context context, OnItemClickCallback callback) {
+        this.context = context;
+        this.onItemClickCallback = callback;
+    }
+
     public interface OnItemClickCallback {
-        void onItemClicked(Movie data);
+        void onItemClicked(Movie movie);
     }
-
-    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback;
-    }
-
-//    public ListMovieAdapter(ArrayList<Movie> list) {
-//        this.listMovie = list;
-//    }
 
     public void setData(ArrayList<Movie> movies) {
         listMovie.clear();
@@ -46,23 +44,6 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.List
 
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
-//        Movie movie = listMovie.get(position);
-//
-//        Glide.with(holder.itemView.getContext())
-//                .load(movie.getPhoto())
-//                .apply(new RequestOptions().override(100, 150))
-//                .into(holder.imgPhoto);
-//
-//        holder.tvName.setText(movie.getName());
-//        holder.tvDescription.setText(movie.getDescription());
-//
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onItemClickCallback.onItemClicked(listMovie.get(holder.getAdapterPosition()));
-//            }
-//        });
-
         holder.bind(listMovie.get(position));
     }
 
@@ -81,11 +62,19 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.List
             imgPhoto = itemView.findViewById(R.id.img_movie_photo);
             tvName = itemView.findViewById(R.id.txt_movie_name);
             tvDescription = itemView.findViewById(R.id.txt_movie_description);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickCallback.onItemClicked(listMovie.get(getAdapterPosition()));
+                }
+            });
         }
 
         void bind(Movie movie) {
             tvName.setText(movie.getName());
             tvDescription.setText(movie.getDescription());
+            Glide.with(context).load(movie.getPosterPath()).into(imgPhoto);
         }
     }
 }
