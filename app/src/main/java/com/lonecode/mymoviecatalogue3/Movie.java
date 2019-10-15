@@ -7,6 +7,8 @@ public class Movie {
     private String userScore;
     private String runtime;
     private String genres;
+    private String posterPath;
+    private String backdropPath;
 
     public int getPhoto() {
         return photo;
@@ -54,5 +56,21 @@ public class Movie {
 
     public void setGenres(String genres) {
         this.genres = genres;
+    }
+
+    public String getPosterPath() {
+        return posterPath;
+    }
+
+    public void setPosterPath(String poster_path) {
+        this.posterPath = poster_path;
+    }
+
+    public String getBackdropPath() {
+        return backdropPath;
+    }
+
+    public void setBackdropPath(String backdrop_path) {
+        this.backdropPath = backdrop_path;
     }
 }

@@ -1,5 +1,6 @@
 package com.lonecode.mymoviecatalogue3;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,12 @@ import java.util.ArrayList;
 
 public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.ListViewHolder> {
     private ArrayList<Movie> listMovie = new ArrayList<>();
-
+    private Context context;
     private OnItemClickCallback onItemClickCallback;
+
+    public ListMovieAdapter(Context context) {
+        this.context = context;
+    }
 
     public interface OnItemClickCallback {
         void onItemClicked(Movie data);
@@ -86,6 +91,7 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.List
         void bind(Movie movie) {
             tvName.setText(movie.getName());
             tvDescription.setText(movie.getDescription());
+            Glide.with(context).load(movie.getPosterPath()).into(imgPhoto);
         }
     }
 }

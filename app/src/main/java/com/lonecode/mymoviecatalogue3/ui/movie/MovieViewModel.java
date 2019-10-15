@@ -19,6 +19,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class MovieViewModel extends ViewModel {
     private static final String API_KEY = "e4621b68dcd1fa1de4a66cfd0664dc28";
+    private static final String IMG_URL = "https://image.tmdb.org/t/p/w500/";
     private MutableLiveData<ArrayList<Movie>> list = new MutableLiveData<>();
 
 //    public MovieViewModel() {
@@ -47,6 +48,8 @@ public class MovieViewModel extends ViewModel {
                         Movie movieItems = new Movie();
                         movieItems.setName(movie.getString("title"));
                         movieItems.setDescription(movie.getString("overview"));
+                        movieItems.setBackdropPath(IMG_URL + movie.getString("backdrop_path"));
+                        movieItems.setPosterPath(IMG_URL + movie.getString("poster_path"));
                         listMovies.add(movieItems);
                     }
                     list.postValue(listMovies);

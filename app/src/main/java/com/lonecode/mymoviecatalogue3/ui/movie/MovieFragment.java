@@ -46,7 +46,7 @@ public class MovieFragment extends Fragment {
         rvMovies.setHasFixedSize(true);
 
         rvMovies.setLayoutManager(new LinearLayoutManager(getActivity()));
-        listMovieAdapter = new ListMovieAdapter();
+        listMovieAdapter = new ListMovieAdapter(getContext());
         listMovieAdapter.notifyDataSetChanged();
         rvMovies.setAdapter(listMovieAdapter);
 
