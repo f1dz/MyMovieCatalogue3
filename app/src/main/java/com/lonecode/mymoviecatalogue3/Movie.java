@@ -1,14 +1,16 @@
 package com.lonecode.mymoviecatalogue3;
 
-public class Movie {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Movie implements Parcelable {
     private int photo;
     private String name;
     private String description;
     private String userScore;
-    private String runtime;
-    private String genres;
+    private String releaseDate;
+    private String originalLanguage;
     private String posterPath;
-    private String backdropPath;
 
     public int getPhoto() {
         return photo;
@@ -42,20 +44,20 @@ public class Movie {
         this.userScore = userScore;
     }
 
-    public String getRuntime() {
-        return runtime;
+    public String getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setRuntime(String runtime) {
-        this.runtime = runtime;
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
-    public String getGenres() {
-        return genres;
+    public String getOriginalLanguage() {
+        return originalLanguage;
     }
 
-    public void setGenres(String genres) {
-        this.genres = genres;
+    public void setOriginalLanguage(String originalLanguage) {
+        this.originalLanguage = originalLanguage;
     }
 
     public String getPosterPath() {
@@ -66,11 +68,44 @@ public class Movie {
         this.posterPath = poster_path;
     }
 
-    public String getBackdropPath() {
-        return backdropPath;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setBackdropPath(String backdrop_path) {
-        this.backdropPath = backdrop_path;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.photo);
+        dest.writeString(this.name);
+        dest.writeString(this.description);
+        dest.writeString(this.userScore);
+        dest.writeString(this.releaseDate);
+        dest.writeString(this.originalLanguage);
+        dest.writeString(this.posterPath);
     }
+
+    public Movie() {
+    }
+
+    protected Movie(Parcel in) {
+        this.photo = in.readInt();
+        this.name = in.readString();
+        this.description = in.readString();
+        this.userScore = in.readString();
+        this.releaseDate = in.readString();
+        this.originalLanguage = in.readString();
+        this.posterPath = in.readString();
+    }
+
+    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel source) {
+            return new Movie(source);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 }

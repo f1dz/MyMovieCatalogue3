@@ -8,6 +8,12 @@
     <string name="movie_name">Movie Name</string>
     <string name="movie_desc">Movie Description. Lorem ipsum dulur</string>
     <string name="movie_image">Movie Image</string>
+    <string name="user_score">User Score</string>
+    <string name="release_date">Release Date</string>
+    <string name="original_language">Original Language</string>
+    <string name="language">Language</string>
+    <string name="english">English</string>
+    <string name="indonesia">Indonesia</string>
 
     <string-array name="data_name_movie">
         <item>Alita: Battle Angle (2019)</item>

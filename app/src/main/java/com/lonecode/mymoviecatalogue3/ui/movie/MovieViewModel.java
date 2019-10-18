@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.lonecode.mymoviecatalogue3.Globals;
 import com.lonecode.mymoviecatalogue3.Movie;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -13,6 +14,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
@@ -22,19 +24,13 @@ public class MovieViewModel extends ViewModel {
     private static final String IMG_URL = "https://image.tmdb.org/t/p/w500/";
     private MutableLiveData<ArrayList<Movie>> list = new MutableLiveData<>();
 
-//    public MovieViewModel() {
-//        mText = new MutableLiveData<>();
-//        mText.setValue("This is Movie fragment");
-//    }
-
-//    public LiveData<String> getText() {
-//        return mText;
-//    }
+    private Globals g = Globals.getInstance();
+    private String language = g.getLanguage();
 
     void setMovie() {
         AsyncHttpClient client = new AsyncHttpClient();
         final ArrayList<Movie> listMovies = new ArrayList<>();
-        String url = "https://api.themoviedb.org/3/discover/movie?api_key=" + API_KEY + "&language=en-US";
+        String url = "https://api.themoviedb.org/3/discover/movie?api_key=" + API_KEY + "&language=" + language;
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -48,8 +44,10 @@ public class MovieViewModel extends ViewModel {
                         Movie movieItems = new Movie();
                         movieItems.setName(movie.getString("title"));
                         movieItems.setDescription(movie.getString("overview"));
-                        movieItems.setBackdropPath(IMG_URL + movie.getString("backdrop_path"));
                         movieItems.setPosterPath(IMG_URL + movie.getString("poster_path"));
+                        movieItems.setUserScore( new DecimalFormat("#").format(movie.getDouble("vote_average") * 10));
+                        movieItems.setReleaseDate(movie.getString("release_date"));
+                        movieItems.setOriginalLanguage(movie.getString("original_language"));
                         listMovies.add(movieItems);
                     }
                     list.postValue(listMovies);

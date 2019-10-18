@@ -1,8 +1,12 @@
 package com.lonecode.mymoviecatalogue3;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.lonecode.mymoviecatalogue3.ui.movie.MovieFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -29,4 +33,26 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        setMode(item.getItemId());
+        return  super.onOptionsItemSelected(item);
+    }
+
+    private void setMode(int selectedMode) {
+        switch (selectedMode) {
+            case R.id.menu_setting:
+                if (getSupportActionBar() != null) {
+//                    Log.d("Menu", "Setting Menu");
+                    Intent moveIntent = new Intent(MainActivity.this, SettingActivity.class);
+                    startActivity(moveIntent);
+                }
+        }
+    }
 }
