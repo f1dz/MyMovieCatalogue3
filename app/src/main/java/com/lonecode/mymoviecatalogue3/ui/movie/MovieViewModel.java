@@ -25,7 +25,7 @@ public class MovieViewModel extends ViewModel {
     private MutableLiveData<ArrayList<Movie>> list = new MutableLiveData<>();
 
     private Globals g = Globals.getInstance();
-    private String language = g.getLanguage();
+    private String language = g.getLanguage() == "en" ? "en-US" : "id-ID";
 
     void setMovie() {
         AsyncHttpClient client = new AsyncHttpClient();

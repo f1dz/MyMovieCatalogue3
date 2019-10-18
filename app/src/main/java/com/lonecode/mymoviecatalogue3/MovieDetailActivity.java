@@ -30,13 +30,33 @@ public class MovieDetailActivity extends AppCompatActivity {
         tvDetailMovieDescription.setText(movie.getDescription());
 
         TextView tvDetailUserScore = findViewById(R.id.tv_detail_userscore);
-        tvDetailUserScore.setText(movie.getUserScore());
+        tvDetailUserScore.setText(movie.getUserScore() + "%");
 
         TextView tvDetailReleaseDate = findViewById(R.id.tv_detail_release_date);
         tvDetailReleaseDate.setText(movie.getReleaseDate());
 
         TextView tvDetailOriginalLanguage = findViewById(R.id.tv_detail_original_language);
-        tvDetailOriginalLanguage.setText(movie.getOriginalLanguage());
+        switch (movie.getOriginalLanguage()) {
+            case "en":
+                tvDetailOriginalLanguage.setText("English");
+                break;
+
+            case "ko":
+                tvDetailOriginalLanguage.setText("Korea");
+                break;
+
+            case "cn":
+                tvDetailOriginalLanguage.setText("Chinese");
+                break;
+
+            case "ja":
+                tvDetailOriginalLanguage.setText("Japan");
+                break;
+
+            default:
+                tvDetailOriginalLanguage.setText(movie.getOriginalLanguage());
+        }
+
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getIntent().getStringExtra(EXTRA_ACTIONBAR_TITLE));

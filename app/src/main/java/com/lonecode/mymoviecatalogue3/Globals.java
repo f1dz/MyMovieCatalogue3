@@ -3,7 +3,7 @@ package com.lonecode.mymoviecatalogue3;
 public class Globals {
     private static Globals instance;
 
-    private String language = "en-US";
+    private String language = "en";
 
     // Restrict the constructor from being instantiated
     private Globals(){}

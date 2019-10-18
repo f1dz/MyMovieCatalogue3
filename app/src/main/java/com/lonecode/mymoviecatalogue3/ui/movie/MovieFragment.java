@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.lonecode.mymoviecatalogue3.Globals;
 import com.lonecode.mymoviecatalogue3.ListMovieAdapter;
 import com.lonecode.mymoviecatalogue3.Movie;
 import com.lonecode.mymoviecatalogue3.MovieDetailActivity;
@@ -78,7 +79,7 @@ public class MovieFragment extends Fragment implements ListMovieAdapter.OnItemCl
     public void onItemClicked(Movie movie) {
 //        Toast.makeText(getActivity(), "Movie: " + movie.getName() + "\nDescription: " + movie.getDescription(), Toast.LENGTH_SHORT).show();
         Intent movieDetailIntent = new Intent(getContext(), MovieDetailActivity.class);
-        movieDetailIntent.putExtra(MovieDetailActivity.EXTRA_ACTIONBAR_TITLE, "Movie Detail");
+        movieDetailIntent.putExtra(MovieDetailActivity.EXTRA_ACTIONBAR_TITLE, getString(R.string.movie_detail));
         movieDetailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE_DETAIL, movie);
         startActivity(movieDetailIntent);
     }
