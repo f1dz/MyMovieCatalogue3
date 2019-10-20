@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.lonecode.mymoviecatalogue3.Globals;
 import com.lonecode.mymoviecatalogue3.Movie;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -16,6 +15,7 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -24,13 +24,19 @@ public class MovieViewModel extends ViewModel {
     private static final String IMG_URL = "https://image.tmdb.org/t/p/w500/";
     private MutableLiveData<ArrayList<Movie>> list = new MutableLiveData<>();
 
-    private Globals g = Globals.getInstance();
-    private String language = g.getLanguage() == "en" ? "en-US" : "id-ID";
-
     void setMovie() {
+        String language;
+
+        if (Locale.getDefault().getLanguage().contentEquals("in")) {
+            language = "id-ID";
+        } else {
+            language = "en-US";
+        }
+
         AsyncHttpClient client = new AsyncHttpClient();
         final ArrayList<Movie> listMovies = new ArrayList<>();
         String url = "https://api.themoviedb.org/3/discover/movie?api_key=" + API_KEY + "&language=" + language;
+        Log.i("isiurl", url);
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
